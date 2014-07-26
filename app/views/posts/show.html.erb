@@ -1,0 +1,41 @@
+<%- model_class = Post -%>
+<div class="page-header">
+  <h1><%= @post.title %></h1>
+</div>
+
+<div class="container">
+
+  <div class="row">
+	<div class="span9">
+	  <%= @post.content %>
+	</div>
+	
+	<div class="span3">
+	  <dt><strong>Author:</strong></dt>
+	  <dd><%= @post.user.email %></dd>
+	</div>
+  </div>
+  <br/>
+  <h3>Comments:</h3>
+  <% if @comments.count > 0 %>
+  <% @comments.each do |comment| %>
+  <p><%= " #{comment.content} - by #{comment.author}" %></p>
+  <% end %>
+  <% else %>
+  <span>No comments yet...</span>
+  <% end%>
+  
+  
+  <br/>
+  <h4>Leave a comment: </h4>
+  <%= form_for @comment, url: {controller: "comment",action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <br/>
+  Author: <%= f.text_field :author %>
+  <br/>
+  Comment: <%= f.text_area :content, size: "60x12" %>
+  <%= hidden_field_tag(:post_id, @post.id) %>
+  <%= f.submit "Create" %>
+  <% end %>
+
+
+</div>

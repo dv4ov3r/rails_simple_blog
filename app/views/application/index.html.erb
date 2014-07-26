@@ -1,0 +1,23 @@
+
+<h3>Latest posts</h3>
+
+<% @posts.each do |post|%>
+
+<article>
+
+  <h2><%= link_to post.title, post_path(post) %></h2>
+  <br/>
+  <div>
+	<%= post.content %>
+
+  </div>
+  <br/>
+  <span><strong>Created by:</strong> <%=post.user.email %></span>
+  <br />
+  <span><strong>Published:</strong> <%=post.created_at %></span>
+
+</article>
+
+
+
+<% end %>
